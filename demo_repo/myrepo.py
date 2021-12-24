@@ -1,6 +1,6 @@
 import requests
 import csv
-from dagster import job, op, get_dagster_logger
+from dagster import job, op, get_dagster_logger, repository
 
 
 @op
@@ -15,3 +15,8 @@ def hello_cereal():
 @job
 def hello_cereal_job():
     hello_cereal()
+
+
+@repository
+def my_repository():
+    return [hello_cereal_job]
